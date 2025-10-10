@@ -1,24 +1,21 @@
 package com.example.demo;
 
+import javax.lang.model.util.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subchapter {
+public class Subchapter implements Element{
     private String title;
-    private List<Content> contents = new ArrayList<>();
+    private List<Element> elements = new ArrayList<>();
 
     public Subchapter(String title) {
         this.title = title;
     }
 
-    public void addContent(Content content) {
-        contents.add(content);
-    }
-
-    public void display() {
+    public void print() {
         System.out.println("  SubChapter: " + title);
-        for (Content c : contents) {
-            c.display();
+        for (Element c : elements) {
+            c.print();
         }
     }
 }

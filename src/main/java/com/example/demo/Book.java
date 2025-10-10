@@ -2,7 +2,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book implements Element{
     private String title;
     private List<Author> authors = new ArrayList<>();
     private List<Chapter> chapters = new ArrayList<>();
@@ -19,7 +19,7 @@ public class Book {
         chapters.add(chapter);
     }
 
-    public void display() {
+    public void print() {
         System.out.println("Book: " + title);
         System.out.println("Authors:");
         for (Author a : authors) {
@@ -31,7 +31,7 @@ public class Book {
         }
         System.out.println("\nContent:");
         for (Chapter c : chapters) {
-            c.display();
+            c.print();
         }
     }
 }

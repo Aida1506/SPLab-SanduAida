@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Image extends Content {
+public class Image implements Element {
     private String imageName;
 
     public Image(String imageName) {
@@ -8,7 +8,7 @@ public class Image extends Content {
     }
 
     @Override
-    public void display() {
+    public void print() {
         System.out.println("Image: " + imageName);
     }
 }

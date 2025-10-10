@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Table extends Content {
+public class Table implements Element {
     private String title;
 
     public Table(String title) {
@@ -8,7 +8,7 @@ public class Table extends Content {
     }
 
     @Override
-    public void display() {
+    public void print() {
         System.out.println("Table: " + title);
     }
 }
