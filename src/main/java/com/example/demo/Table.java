@@ -26,4 +26,14 @@ public class Table implements Element {
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Table");
     }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
 }

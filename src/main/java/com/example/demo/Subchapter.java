@@ -33,4 +33,14 @@ public class Subchapter implements Element{
     public int get(Element element) {
         return 0;
     }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
 }

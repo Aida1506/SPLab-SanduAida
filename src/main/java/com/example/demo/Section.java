@@ -21,6 +21,12 @@ public class Section implements Element {
 
     @Override
     public void add(Element element) {
+        if (element.getParent() != null) {
+            throw new IllegalStateException(
+                    "Element already belongs to another Section!"
+            );
+        }
+        element.setParent(this);
         elements.add(element);
     }
 
@@ -32,6 +38,16 @@ public class Section implements Element {
     @Override
     public int get(Element element) {
         return elements.indexOf(element);
+    }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
     }
 }
 

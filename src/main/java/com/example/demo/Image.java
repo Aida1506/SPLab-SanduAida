@@ -26,4 +26,14 @@ public class Image implements Element {
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Image");
     }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
 }

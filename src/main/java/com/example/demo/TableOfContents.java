@@ -28,5 +28,15 @@ public class TableOfContents implements Element {
     public int get(Element element) {
         return elements.indexOf(element);
     }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
 }
 

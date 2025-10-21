@@ -20,6 +20,16 @@ public class Chapter implements Element{
         return subChapters.indexOf(element);
     }
 
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
+
 
     public void print() {
         System.out.println("Chapter: " + title);

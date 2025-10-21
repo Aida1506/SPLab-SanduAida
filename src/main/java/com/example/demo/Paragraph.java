@@ -26,4 +26,14 @@ public class Paragraph implements Element {
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Paragraph");
     }
+
+    @Override
+    public Element getParent() {
+        return null;
+    }
+
+    @Override
+    public void setParent(Element element) {
+
+    }
 }
