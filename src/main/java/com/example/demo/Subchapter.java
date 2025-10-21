@@ -18,4 +18,19 @@ public class Subchapter implements Element{
             c.print();
         }
     }
+
+    @Override
+    public void add(Element element) {
+
+    }
+
+    @Override
+    public void remove(Element element) {
+
+    }
+
+    @Override
+    public int get(Element element) {
+        return 0;
+    }
 }

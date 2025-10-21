@@ -15,10 +15,26 @@ public class Chapter implements Element{
         subChapters.add(subChapter);
     }
 
+    @Override
+    public int get(Element element) {
+        return subChapters.indexOf(element);
+    }
+
+
     public void print() {
         System.out.println("Chapter: " + title);
         for (Subchapter sc : subChapters) {
             sc.print();
         }
+    }
+
+    @Override
+    public void add(Element element) {
+
+    }
+
+    @Override
+    public void remove(Element element) {
+
     }
 }

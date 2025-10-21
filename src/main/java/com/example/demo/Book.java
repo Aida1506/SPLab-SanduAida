@@ -2,10 +2,10 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book implements Element{
+public class Book{
     private String title;
     private List<Author> authors = new ArrayList<>();
-    private List<Chapter> chapters = new ArrayList<>();
+    private List<Element> elements = new ArrayList<>();
 
     public Book(String title) {
         this.title = title;
@@ -15,23 +15,19 @@ public class Book implements Element{
         authors.add(author);
     }
 
-    public void addChapter(Chapter chapter) {
-        chapters.add(chapter);
+    public void addElement(Element element) {
+        elements.add(element);
     }
 
     public void print() {
         System.out.println("Book: " + title);
-        System.out.println("Authors:");
+        System.out.print("Authors: ");
         for (Author a : authors) {
-            System.out.println(" - " + a.getName());
-        }
-        System.out.println("Table of Contents:");
-        for (Chapter c : chapters) {
-            System.out.println(" * " + c);
+            System.out.print(a.getName() + " ");
         }
         System.out.println("\nContent:");
-        for (Chapter c : chapters) {
-            c.print();
+        for (Element e : elements) {
+            e.print();
         }
     }
 }
