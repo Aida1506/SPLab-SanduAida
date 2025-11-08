@@ -7,12 +7,9 @@ import java.util.*;
 @RestController
 @RequestMapping("/books")
 public class BooksController {
-
-    // simulăm o "bază de date" temporară cu o listă
     private final Map<Integer, String> books = new HashMap<>();
 
     public BooksController() {
-        // valori dummy
         books.put(1, "The Great Gatsby");
         books.put(2, "To Kill a Mockingbird");
         books.put(3, "1984");

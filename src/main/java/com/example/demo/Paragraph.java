@@ -1,11 +1,18 @@
 package com.example.demo;
 
+
+import jakarta.persistence.*;
+
+@Entity
+@DiscriminatorValue("PARAGRAPH")
 public class Paragraph extends Element {
     private String text;
 
     public Paragraph(String text) {
         this.text = text;
     }
+
+    public Paragraph() {}
 
     @Override
     public void print() {
@@ -25,15 +32,5 @@ public class Paragraph extends Element {
     @Override
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Paragraph");
-    }
-
-    @Override
-    public Element getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Element element) {
-
     }
 }

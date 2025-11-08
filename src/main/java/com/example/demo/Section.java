@@ -1,15 +1,26 @@
 package com.example.demo;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@DiscriminatorValue("SECTION")
 public class Section extends Element {
     private String title;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
     public Section(String title) {
         this.title = title;
     }
+
+    public Section() {}
 
     @Override
     public void print() {
@@ -33,21 +44,12 @@ public class Section extends Element {
     @Override
     public void remove(Element element) {
         elements.remove(element);
+        element.setParent(null);
     }
 
     @Override
     public int get(Element element) {
         return elements.indexOf(element);
-    }
-
-    @Override
-    public Element getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Element element) {
-
     }
 }
 

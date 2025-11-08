@@ -1,10 +1,20 @@
 package com.example.demo;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+
+@Entity
+@DiscriminatorValue("IMAGE")
 public class Image extends Element {
     private String path;
 
     public Image(String path) {
         this.path = path;
+    }
+
+    public Image(){
+
     }
 
     @Override
@@ -25,15 +35,5 @@ public class Image extends Element {
     @Override
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Image");
-    }
-
-    @Override
-    public Element getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Element element) {
-
     }
 }

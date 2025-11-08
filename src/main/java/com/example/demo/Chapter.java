@@ -9,7 +9,8 @@ import jakarta.persistence.*;
 public class Chapter extends Element {
     private String title;
 
-    private List<Subchapter> subChapters = new ArrayList<>();
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Element> subChapters = new ArrayList<>();
 
     public Chapter(String title) {
         this.title = title;
@@ -29,31 +30,22 @@ public class Chapter extends Element {
         return subChapters.indexOf(element);
     }
 
-    @Override
-    public Element getParent() {
-        return parent;
-    }
-
-    @Override
-    public void setParent(Element element) {
-
-    }
-
-
     public void print() {
         System.out.println("Chapter: " + title);
-        for (Subchapter sc : subChapters) {
+        for (Element sc : subChapters) {
             sc.print();
         }
     }
 
     @Override
     public void add(Element element) {
-
+        subChapters.add(element);
+        element.setParent(this);
     }
 
     @Override
     public void remove(Element element) {
-
+        subChapters.remove(element);
+        element.setParent(null);
     }
 }

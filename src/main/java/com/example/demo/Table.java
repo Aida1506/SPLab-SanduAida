@@ -1,11 +1,19 @@
 package com.example.demo;
 
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("TABLE")
 public class Table extends Element {
     private String title;
 
     public Table(String title) {
         this.title = title;
     }
+
+    public Table() {}
 
     @Override
     public void print() {
@@ -25,15 +33,5 @@ public class Table extends Element {
     @Override
     public int get(Element element) {
         throw new UnsupportedOperationException("No elements in Table");
-    }
-
-    @Override
-    public Element getParent() {
-        return null;
-    }
-
-    @Override
-    public void setParent(Element element) {
-
     }
 }
