@@ -15,7 +15,7 @@ import java.util.List;
 public class Subchapter extends Element {
     private String title;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Element> elements = new ArrayList<>();
 
     public Subchapter(String title) {

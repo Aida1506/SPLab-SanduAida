@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("TABLEOFCONTENTS")
 public class TableOfContents extends Element {
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Element> elements = new ArrayList<>();
 
     @Override
