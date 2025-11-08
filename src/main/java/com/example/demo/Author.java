@@ -1,4 +1,5 @@
 package com.example.demo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class Author {
     private String name;
 
     @ManyToMany(mappedBy = "authors")
+    @JsonBackReference
     private List<Book> books = new ArrayList<>();
 
     public Author(String name) {

@@ -1,7 +1,23 @@
 package com.example.demo;
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "element_type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Chapter.class, name = "CHAPTER"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "IMAGE"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "PARAGRAPH"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "SECTION"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "SUBCHAPTER"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "TABLE"),
+        @JsonSubTypes.Type(value = Chapter.class, name = "TABLEOFCONTENTS")
+})
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "element_type")
