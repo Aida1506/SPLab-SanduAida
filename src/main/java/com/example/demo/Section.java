@@ -13,7 +13,7 @@ import java.util.List;
 public class Section extends Element {
     private String title;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Element> elements = new ArrayList<>();
 
     public Section(String title) {

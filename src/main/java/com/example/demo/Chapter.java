@@ -3,9 +3,14 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("CHAPTER")
+@Data
+@AllArgsConstructor
 public class Chapter extends Element {
     private String title;
 

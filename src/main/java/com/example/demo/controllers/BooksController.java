@@ -1,55 +1,68 @@
 package com.example.demo.controllers;
 
+import com.example.demo.repository.AuthorsRepository;
+import com.example.demo.repository.ElementRepository;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.Book;
+import com.example.demo.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/books")
 public class BooksController {
-    private final Map<Integer, String> books = new HashMap<>();
 
-    public BooksController() {
-        books.put(1, "The Great Gatsby");
-        books.put(2, "To Kill a Mockingbird");
-        books.put(3, "1984");
+    private final BookRepository booksRepository;
+    private final AuthorsRepository authorsRepository;
+    private final ElementRepository  elementRepository;
+
+    @Autowired
+    public BooksController(BookRepository booksRepository, AuthorsRepository authorsRepository, ElementRepository elementRepository) {
+        this.booksRepository = booksRepository;
+        this.authorsRepository = authorsRepository;
+        this.elementRepository = elementRepository;
     }
 
-    // GET /books - returnează toate cărțile
+    // GET /books - toate cartile
     @GetMapping
-    public Collection<String> getAllBooks() {
-        return books.values();
+    public List<Book> getAllBooks() {
+        return booksRepository.findAll();
     }
 
-    // GET /books/{id} - returnează detalii despre o carte anume
+    // GET /books/{id} - carte dupa id
     @GetMapping("/{id}")
-    public String getBookById(@PathVariable int id) {
-        return books.getOrDefault(id, "Book not found");
+    public Book getBookById(@PathVariable Integer id) {
+        return booksRepository.findById(id).orElse(null);
     }
 
-    // POST /books - creează o carte nouă
+    // POST /books - adauga o carte noua
     @PostMapping
-    public String createBook(@RequestBody String title) {
-        int newId = books.size() + 1;
-        books.put(newId, title);
-        return "Book created with ID: " + newId;
+    public Book createBook(@RequestBody Book book) {
+        return booksRepository.save(book);
     }
 
-    // PUT /books/{id} - înlocuiește o carte existentă
+    // PUT /books/{id} - actulizeaza o carte
     @PutMapping("/{id}")
-    public String updateBook(@PathVariable int id, @RequestBody String title) {
-        if (books.containsKey(id)) {
-            books.put(id, title);
-            return "Book with ID " + id + " updated to: " + title;
-        } else {
-            return "Book not found";
-        }
+    public Book updateBook(@PathVariable Integer id, @RequestBody Book updatedBook) {
+        return booksRepository.findById(id)
+                .map(book -> {
+                    book.setTitle(updatedBook.getTitle());
+                    book.setAuthors(updatedBook.getAuthors());
+                    book.setElements(updatedBook.getElements());
+                    return booksRepository.save(book);
+                })
+                .orElseGet(() -> {
+                    updatedBook.setId(Long.valueOf(id)); // crearea unei carti daca nu exista
+                    return booksRepository.save(updatedBook);
+                });
     }
 
-    // DELETE /books/{id} - șterge o carte
+    // DELETE /books/{id} - sterge o carte
     @DeleteMapping("/{id}")
-    public String deleteBook(@PathVariable int id) {
-        if (books.remove(id) != null) {
+    public String deleteBook(@PathVariable Integer id) {
+        if (booksRepository.existsById(id)) {
+            booksRepository.deleteById(id);
             return "Book with ID " + id + " deleted.";
         } else {
             return "Book not found";
