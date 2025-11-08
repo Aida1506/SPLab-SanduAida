@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Section implements Element {
+public class Section extends Element {
     private String title;
     private List<Element> elements = new ArrayList<>();
 

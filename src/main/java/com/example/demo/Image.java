@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public class Image implements Element {
+public class Image extends Element {
     private String path;
 
     public Image(String path) {

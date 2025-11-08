@@ -2,17 +2,26 @@ package com.example.demo;
 
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.*;
 
-public class Chapter implements Element{
+@Entity
+@DiscriminatorValue("CHAPTER")
+public class Chapter extends Element {
     private String title;
+
     private List<Subchapter> subChapters = new ArrayList<>();
 
     public Chapter(String title) {
         this.title = title;
     }
 
+    public Chapter() {
+
+    }
+
     public void addSubChapter(Subchapter subChapter) {
         subChapters.add(subChapter);
+        subChapter.setParent(this);
     }
 
     @Override
@@ -22,7 +31,7 @@ public class Chapter implements Element{
 
     @Override
     public Element getParent() {
-        return null;
+        return parent;
     }
 
     @Override
