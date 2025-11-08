@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableOfContents implements Element {
+public class TableOfContents extends Element {
     private List<Element> elements = new ArrayList<>();
 
     @Override

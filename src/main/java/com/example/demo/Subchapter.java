@@ -4,7 +4,7 @@ import javax.lang.model.util.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subchapter implements Element{
+public class Subchapter extends Element {
     private String title;
     private List<Element> elements = new ArrayList<>();
 

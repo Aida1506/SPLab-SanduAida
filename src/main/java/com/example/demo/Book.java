@@ -1,10 +1,25 @@
 package com.example.demo;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
+    @ManyToMany
     private List<Author> authors = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
     private List<Element> elements = new ArrayList<>();
 
     public Book(String title) {
