@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>All Books</h1>
+<a href="javascript:void(0)" onclick="sendRequest()">Fetch Books</a>
+<div id="sseDiv"></div>
+<script>
+    function sendRequest() {
+        if (typeof(EventSource) !== "undefined") {
+            const source = new EventSource(`http://localhost:8081/books-sse`);
+            source.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+
+                let authors = "No authors";
+                if (data.authors && data.authors.length > 0) {
+                    authors = data.authors.map(a => a.name).join(", ");
+                }
+
+                let elements = "No elements";
+                if (data.elements && data.elements.length > 0) {
+                    elements = data.elements.map(e => e.title + " (" + e.element_type + ")").join(", ");
+                }
+
+                document.getElementById("sseDiv").innerHTML +=
+                    `ID: ${data.id}<br>` +
+                    `Title: ${data.title}<br>` +
+                    `Authors: ${authors}<br>` +
+                    `Elements: ${elements}<br><hr>`;
+            };
+        } else {
+            document.getElementById("sseDiv").innerHTML = "Your browser does not support SSE.";
+        }
+    }
+</script>
+</body>
+</html>
